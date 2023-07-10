@@ -2,6 +2,11 @@
 
 	class Utilisateur_Model extends CI_Model{
 
+		public function __construct() {
+			parent::__construct();
+			$this->load->model('authentification/Profil_Model','profil');
+		}
+
 		public static $table = 'utilisateur';
         public static $primarykey = 'id';
 
@@ -114,6 +119,28 @@
 
 			$resultat = $TMB * $facteur;
 
+			return $resultat;
+		}
+
+		public function obtenir_perte_calorie($objectif) {
+			$conversion = 7700;
+			$resultat = abs($objectif) * $conversion;
+			return $resultat;
+		}
+
+		public function obtenir_perte_necessaire($objectif) {
+			if(strpos($objectif, "-") !== false) {
+				return 1000;
+			}else{
+				return 500;
+			}
+			return false;
+		}
+
+		public function obtenir_calorie_journaliere($utilisateur, $objectif) {
+			$calorie_usuel = $this->obtenir_calorie_usuel($utilisateur);
+			$perte_necessaire = $this->obtenir_perte_necessaire($objectif);
+			$resultat = $calorie_usuel + $perte_necessaire;
 			return $resultat;
 		}
 
