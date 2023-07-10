@@ -3,6 +3,9 @@
         insert into genre values(default,'Femme');
         insert into genre values(default,'Masculin');
 
+    -- ADMINISTRATEUR
+        insert into administrateur values(default,'admin@gmail.com','admin');
+
     -- CATEGORIE ALIMENT
         insert into categorie_aliment values(default,'Laitier');
         insert into categorie_aliment values(default,'Viande Rouge');
