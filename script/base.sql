@@ -17,6 +17,8 @@
         foreign key (id_utilisateur) references utilisateur(id)
     );
 
+alter table profil add column frequence_activite int;
+
     create table utilisateur(
         id SERIAL PRIMARY KEY,
         nom VARCHAR(250),

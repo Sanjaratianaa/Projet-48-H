@@ -11,13 +11,14 @@
 		public $taille;
 		public $date_report;
 		public $id_utilisateur;
+		public $frequence_activite;
 
 		public function format_date($date)
 		{
 			return date("Y-m-d", strtotime($date));
 		}
 
-		public function insert($poids,$genre,$taille,$date_report,$id_utilisateur) {
+		public function insert($poids,$genre,$taille,$date_report,$id_utilisateur, $frequence) {
 			if($poids <= 0 ) throw new Exception("C\'est impossible d'avoir un poids negatif ou null, reverifie bien!");
 			if($genre <= 0 ) throw new Exception("Sans genre!?");
 			if($taille <= 0 ) throw new Exception("Tu n\'existes pas ? Ta taille!");
@@ -27,7 +28,8 @@
 				'genre' => $genre,
 				'taille' => $taille,
 				'date_report' => $this->format_date($date_report),
-				'id_utilisateur' => $id_utilisateur
+				'id_utilisateur' => $id_utilisateur,
+				'frequence_activite' => $frequence
 			];
 
 			try {
@@ -38,7 +40,7 @@
 
 		}
 
-		public function update($poids = 0, $genre = 0, $taille = 0, $date) {
+		public function update($poids = 0, $genre = 0, $taille = 0, $date, $frequence = 0) {
 			$data = array();
 		
 			if ($poids != 0) {
@@ -54,6 +56,11 @@
 			if ($genre != 0) {
 				if($genre < 0) throw new Exception("Le genre est negatif!");
 				$data['genre'] = $genre;
+			}
+
+			if($frequence != 0) {
+				if($frequence < 0) throw new Exception("La frequence d'activite est negatif!");
+				$data['frequence_activite']=$frequence;
 			}
 		
 			$data['date_report'] = $this->format_date($date);
@@ -77,6 +84,7 @@
 				$profil->genre = $row["genre"];
 				$profil->taille = $row["taille"];
 				$profil->date_report = $row["date_report"];
+				$profil->frequence_activite = $row['frequence_activite'];
 				$resultats[] = $profil;
 			}
 
