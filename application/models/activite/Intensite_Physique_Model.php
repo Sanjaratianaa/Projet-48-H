@@ -37,7 +37,17 @@
 		}
 
 		public function obtenir_par_frequence($frequence_hebdomadaire) {
-			$this->db->where('');
+			$this->db->where('inferieur <=', $frequence_hebdomadaire);
+			$this->db->order_by('id', 'DESC');
+			$this->db->limit(1);
+			
+			$query = $this->db->get(self::$table);
+			
+			echo $this->db->last_query();
+			if ($query->num_rows() > 0) {
+				return $query->result();
+			}
+			return false;
 		}
 
 	}

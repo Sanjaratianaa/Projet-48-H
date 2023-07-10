@@ -69,9 +69,9 @@ create database regime;
     );
 
     create table intensite_physique(
-        id serial primary key,
+        id INT primary key,
         designation VARCHAR(100),
-        inferieur INT
+        inferieur DOUBLE PRECISION
     );
 
     --// TIME ou INT le duree ?

@@ -77,3 +77,9 @@
     insert into plat values(default,'Porc grille avec salade de chou-Fleur');
     insert into plat values(default,'Smoothie aux baies et a l''avoine');
     insert into plat values(default,'Quinoa aux legumes et a la dinde');
+
+    -- INTENSITE - PHYSIQUE
+
+    insert into intensite_physique values(1,'Sedentaire',1);
+    insert into intensite_physique values(5,'Modere',5);
+    insert into intensite_physique values(10,'Intense','Infinity');
