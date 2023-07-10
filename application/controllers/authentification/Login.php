@@ -11,7 +11,7 @@ class Login extends CI_Controller {
 		$this->load->model('authentification/Profil_Model' , 'profil');
 	}
 
-	public function index_Utilisateur(){
+	public function index(){
 		$this->load->view("Login");
 	}
 

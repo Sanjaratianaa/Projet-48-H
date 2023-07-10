@@ -1,6 +1,6 @@
 <?php
 
-class Regime extends CI_Model
+class Regime_Model extends CI_Model
 {
 
     public function __construct() {
@@ -23,7 +23,7 @@ class Regime extends CI_Model
         $resultats = array();
         $resultats_table = $requete->result_array();
         foreach($resultats_table as $row) {
-            $regime = new Regime();
+            $regime = new Regime_Model();
             $regime->id = $row["id"];
             $regime->designation = $row["designation"];
             $resultats[] = $regime;
@@ -36,7 +36,7 @@ class Regime extends CI_Model
         $resultats = array();
         $resultats_table = $requete->result_array();
         foreach($resultats_table as $row) {
-            $plat_regime = new Regime();
+            $plat_regime = new Regime_Model();
             $plat_regime->id = $row["id"];
             $plat_regime->id_plat = $row["id_plat"];
             $plat_regime->id_regime = $row["id_regime"];
@@ -47,7 +47,16 @@ class Regime extends CI_Model
         return $resultats;
     }
 
-    public function inserer_plat_regime($id_regime, $id_plat){
+    public function inserer_plat_regime($id_regime, $id_plat)
+    {
+        if (empty($id_regime) || $id_regime == null){
+            throw new Exception("Le régime est obligatoire");
+        }
+
+        if (empty($id_plat) || $id_plat == null){
+            throw new Exception("Le plat est obligatoire");
+        }
+
         $data = [
             'id_regime' => $id_regime,
             'id_plat' => $id_plat
@@ -86,7 +95,7 @@ class Regime extends CI_Model
         $resultats = array();
         $resultat_table = $requete->result_array();
         foreach ($resultat_table as $row){
-            $plat_regime = new Regime();
+            $plat_regime = new Regime_Model();
             $plat_regime->id = $row["id"];
             $plat_regime->id_plat = $row["id_plat"];
             $plat_regime->id_regime = $row["id_regime"];
@@ -95,5 +104,29 @@ class Regime extends CI_Model
             $resultats[] = $plat_regime;
         }
         return $resultats;
+    }
+
+    public function inserer($designation, $id_plats){
+        if (empty($designation) || $designation == null){
+            throw new Exception("La désignation est obligatoire");
+        }
+
+        $id_regime = "select nextval('regime_id_seq')";
+        $data = [
+            'designation' => $designation
+        ];
+
+        try {
+            $this->db->trans_start();
+            $this->db->insert(self::$table, $data);
+            foreach ($id_plats as $id_plat){
+                $plat_regime = new Regime_Model();
+                $plat_regime->inserer_plat_regime($id_regime, $id_plat);
+            }
+            $this->db->trans_complete();
+        }catch ( Exception $exception ){
+            $this->db->trans_rollback();
+            throw $exception;
+        }
     }
 }
