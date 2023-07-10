@@ -5,41 +5,43 @@ class Registration extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->helper('Form_helper');
-		$this->load->model('Utilisateur_Model' , 'utilisateur');
-		$this->load->model('Profil_Model' , 'profil');
+		$this->load->model('authentification/Utilisateur_Model' , 'utilisateur');
+		$this->load->model('authentification/Profil_Model' , 'profil');
 	}
 
 	public function index(){
 		$this->load->view("Registration");
 	}
 
-	// public function validate($rules) {
-    //     $this->load->library('form_validation');
-    //     $this->form_validation->set_rules($rules);
+	public function validation_MotDePasse($password, $confirmation) {
+        if($password == $confirmation)
+		{
+			return true;
+		}
+		return false;
+    }
 
-    //     if ($this->form_validation->run()) {
-    //         return true; // Validation passed
-    //     } else {
-    //         return false; // Validation failed
-    //     }
-    // }
+	public function inscription(){
+		$utilisateur = new Utilisateur_Model();
 
-	// public function connexion(){
-	// 	$utilisateur = new Utilisateur_Model();
-
-	// 		$data = [
-	// 			'nom' => 'Rakoto Jean',
-	// 			'mail' => 'jean@gmail.com',
-	// 			'mot_de_passe' => '1234',
-	// 			'id_profil' => 1
-	// 		];
+		$nom = "Anjaratiana";
+		$prenoms = "Layah";
+		$mail = "layah@gmail.com";
+		$mot_de_passe = "1234";
+		$confirmation = "1234";
+		$date_naissance = "10-10-2000";
 			
-	// 		$utilisateur->insert($data);
+		if($this->validation_MotDePasse($mot_de_passe, $confirmation))
+		{
+			if($utilisateur->Validate_Email($mail))
+			{
+				$utilisateur->insert($nom, $prenoms, $mail, $mot_de_passe, $date_naissance);
+			}
+		}
+		
+		return "";
 
-	// 	return "";
-
-	// }
+	}
 
 }
 
