@@ -36,6 +36,7 @@
 			return $resultats;
 		}
 
+		// Mbola tsy mety
 		public function obtenir_par_frequence($frequence_hebdomadaire) {
 			$this->db->where('inferieur <=', $frequence_hebdomadaire);
 			$this->db->order_by('id', 'DESC');

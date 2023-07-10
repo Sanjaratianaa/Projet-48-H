@@ -83,3 +83,29 @@
     insert into intensite_physique values(1,'Sedentaire',1);
     insert into intensite_physique values(5,'Modere',5);
     insert into intensite_physique values(10,'Intense','Infinity');
+
+    -- ACTIVITE
+        -- SEDENTAIRE
+            insert into activite values(default,'Marche Lente',120,1,'01:00:00');
+            insert into activite values(default,'Yoga doux',160,1,'01:00:00');
+            insert into activite values(default,'Etirements',90,1,'01:00:00');
+            insert into activite values(default,'Tai Chi',180,1,'01:00:00');
+            insert into activite values(default,'Pilates',200,1,'01:00:00');
+            insert into activite values(default,'Golf (sans voiturette)',240,1,'01:00:00');
+
+            -- MODERE
+            insert into activite values(default,'Course a pied',600,5,'01:00:00');
+            insert into activite values(default,'Natation',350,5,'01:00:00');
+            insert into activite values(default,'Cyclisme',300,5,'01:00:00');
+            insert into activite values(default,'Danse',300,5,'01:00:00');
+            insert into activite values(default,'Aerobic',400,5,'01:00:00');
+            insert into activite values(default,'Randonnee',400,5,'01:00:00');
+            insert into activite values(default,'Tennis',400,5,'01:00:00');
+
+            -- INTENSE
+            insert into activite values(default,'Course a pied (Intensive)',800,10,'01:00:00');
+            insert into activite values(default,'Entrainement en circuit',800,10,'01:00:00');
+            insert into activite values(default,'Boxe',800,10,'01:00:00');
+            insert into activite values(default,'Natation Intense',800,10,'01:00:00');
+            insert into activite values(default,'Entrainement en salle de musculation',600,10,'01:00:00');
+            insert into activite values(default,'Escalade',700,10,'01:00:00');
