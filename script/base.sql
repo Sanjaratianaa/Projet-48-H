@@ -7,7 +7,9 @@ create database regime;
         poids DOUBLE PRECISION,
         genre DOUBLE PRECISION,
         taille DOUBLE PRECISION,
-        date_report date
+        date_report DATE,
+        id_utilisateur INT,
+        foreign key (id_utilisateur) references utilisateur(id)
     );
 
     create table utilisateur(
@@ -42,6 +44,11 @@ create database regime;
         id serial primary key,
         designation VARCHAR(50)
     );
+
+    
+-- ALTER
+    -- UTILISATEUR
+    ALTER TABLE utilisateur add column date_naissance DATE;
 
 -- DATA
     -- PROFIL
