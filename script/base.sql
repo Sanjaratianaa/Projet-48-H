@@ -7,6 +7,14 @@ create database regime;
         designation VARCHAR(100)
     );
 
+    create table utilisateur(
+        id SERIAL PRIMARY KEY,
+        nom VARCHAR(250),
+        prenoms VARCHAR(250),
+        mail VARCHAR(250),
+        mot_de_passe VARCHAR(250)
+    );
+
     create table profil(
         id SERIAL PRIMARY KEY,
         poids DOUBLE PRECISION,
@@ -15,16 +23,6 @@ create database regime;
         date_report DATE,
         id_utilisateur INT,
         foreign key (id_utilisateur) references utilisateur(id)
-    );
-
-    create table utilisateur(
-        id SERIAL PRIMARY KEY,
-        nom VARCHAR(250),
-        prenoms VARCHAR(250),
-        mail VARCHAR(250),
-        mot_de_passe VARCHAR(250),
-        id_profil INT,
-        foreign key (id_profil) references profil(id)
     );
 
     create table administrateur(
@@ -74,7 +72,7 @@ create database regime;
 
 -- VIEW
     -- ALIMENT
-    create view v_categorie_aliment as 
+    create or replace view v_categorie_aliment as
         select a.id, a.id_categorie_aliment, c.designation as designation_categorie, a.designation as designation_aliment from aliment a join categorie_aliment c on a.id_categorie_aliment = c.id;
 
     create or replace view v_plat_regime as
