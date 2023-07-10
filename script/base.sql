@@ -1,5 +1,5 @@
-create database regime;
-\c regime
+--create database regime;
+--\c regime
 
 -- TABLES
     create table genre(
@@ -22,9 +22,7 @@ create database regime;
         nom VARCHAR(250),
         prenoms VARCHAR(250),
         mail VARCHAR(250),
-        mot_de_passe VARCHAR(250),
-        id_profil INT,
-        foreign key (id_profil) references profil(id)
+        mot_de_passe VARCHAR(250)
     );
 
     create table administrateur(

@@ -79,9 +79,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	IO LE
+	IO LE bg
 	<?php
-
 		// echo create_primary_key("SAR" , "s_type_fish", 10);
 
 	?>

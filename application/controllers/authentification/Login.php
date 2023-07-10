@@ -11,6 +11,10 @@ class Login extends CI_Controller {
 		$this->load->model('authentification/Profil_Model' , 'profil');
 	}
 
+	public function index(){
+		$this->index_Utilisateur();
+	}
+
 	public function index_Utilisateur(){
 		$this->load->view("Login");
 	}
@@ -21,12 +25,12 @@ class Login extends CI_Controller {
 
 	public function Connexion_Utilisateur(){
         $utilisateur = new Utilisateur_Model();
-		$mail = "layah@gmail.com";
-		$mot_de_passe = "1234";
+		$mail = $_POST['mail'];
+		$mot_de_passe = $_POST['mot_de_passe'];
 		$resultat = $utilisateur->Validation_Connexion($mail, $mot_de_passe);
 		$this->session->set_userdata("utilisateur",$resultat);
 		print_r($resultat);
-		return "";
+		return $_SESSION['utilisateur'];
 	}
 
 	public function Connexion_Administrateur(){
