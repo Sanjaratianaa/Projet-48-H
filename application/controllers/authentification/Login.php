@@ -23,7 +23,7 @@ class Login extends CI_Controller {
         $utilisateur = new Utilisateur_Model();
 		$mail = "layah@gmail.com";
 		$mot_de_passe = "1234";
-		$resultat = $utilisateur->Vali	dation_Connexion($mail, $mot_de_passe);
+		$resultat = $utilisateur->Validation_Connexion($mail, $mot_de_passe);
 		$this->session->set_userdata("utilisateur",$resultat);
 		print_r($resultat);
 		return "";
