@@ -88,6 +88,9 @@ create database regime;
     -- UTILISATEUR
     ALTER TABLE utilisateur add column date_naissance DATE;
 
+    -- PROFIL
+    alter table profil add column frequence_activite int;
+
 -- VIEW
     -- ALIMENT
     create view v_categorie_aliment as 
