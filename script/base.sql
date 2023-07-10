@@ -50,7 +50,6 @@ create database regime;
         designation VARCHAR(50)
     );
 
-<<<<<<< Updated upstream
     create table if not exists plat_aliment(
         id serial primary key,
         id_plat INT references plat(id),
@@ -69,7 +68,6 @@ create database regime;
         id_plat INT references plat(id)
     );
 
-=======
     create table intensite_physique(
         id serial primary key,
         designation VARCHAR(100),
@@ -86,8 +84,6 @@ create database regime;
         foreign key (id_intensite) references intensite_physique(id)
     );
 
-    
->>>>>>> Stashed changes
 -- ALTER
     -- UTILISATEUR
     ALTER TABLE utilisateur add column date_naissance DATE;
