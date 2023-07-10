@@ -36,6 +36,21 @@
 			return $resultats;
 		}
 
+		public function lister_tout() {
+			$requete = $this->db->get(self::$table);
+			$resultats = array();
+			$resultats_table = $requete->result_array();
+			foreach($resultats_table as $row) {
+				$alimentModel = new Aliment_Model();
+				$alimentModel->id = $row["id"];
+				$alimentModel->id_categorie_aliment = $row["id_categorie_aliment"];
+				$alimentModel->designation_categorie = $row["designation_categorie"];
+				$alimentModel->designation_aliment = $row["designation_aliment"];
+				$resultats[] = $alimentModel;
+			}
+			return $resultats;
+		}
+
 		public function lister($id_categorie) {
 			$this->db->where('id_categorie_aliment',$id_categorie);
 			$requete = $this->db->get(self::$table);
