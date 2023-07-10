@@ -50,6 +50,11 @@ create database regime;
     -- UTILISATEUR
     ALTER TABLE utilisateur add column date_naissance DATE;
 
+-- VIEW
+    -- ALIMENT
+    create view v_categorie_aliment as 
+        select a.id, a.id_categorie_aliment, c.designation as designation_categorie, a.designation as designation_aliment from aliment a join categorie_aliment c on a.id_categorie_aliment = c.id;
+
 -- DATA
     -- PROFIL
     insert into profil values (1,'invite');
