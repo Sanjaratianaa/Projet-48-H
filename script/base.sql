@@ -17,7 +17,7 @@ create database regime;
         mail VARCHAR(250),
         mot_de_passe VARCHAR(250),
         id_profil INT,
-        foreign key (id_profil) references profil(id_profil)
+        foreign key (id_profil) references profil(id)
     );
 
     create table administrateur(
