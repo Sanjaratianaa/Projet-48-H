@@ -70,7 +70,21 @@ create database regime;
     );
 
 =======
+    create table intensite_physique(
+        id serial primary key,
+        designation VARCHAR(100),
+        inferieur INT
+    );
 
+    --// TIME ou INT le duree ?
+    create table activite (
+        id serial primary key,
+        designation VARCHAR(100),
+        calorie_moyen DOUBLE PRECISION,
+        id_intensite INT,
+        duree TIME,
+        foreign key (id_intensite) references intensite_physique(id)
+    );
 
     
 >>>>>>> Stashed changes
