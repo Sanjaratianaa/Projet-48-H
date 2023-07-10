@@ -66,9 +66,28 @@ create database regime;
         id_plat INT references plat(id)
     );
 
+    create table intensite_physique(
+        id INT primary key,
+        designation VARCHAR(100),
+        inferieur DOUBLE PRECISION
+    );
+
+    --// TIME ou INT le duree ?
+    create table activite (
+        id serial primary key,
+        designation VARCHAR(100),
+        calorie_moyen DOUBLE PRECISION,
+        id_intensite INT,
+        duree TIME,
+        foreign key (id_intensite) references intensite_physique(id)
+    );
+
 -- ALTER
     -- UTILISATEUR
     ALTER TABLE utilisateur add column date_naissance DATE;
+
+    -- PROFIL
+    alter table profil add column frequence_activite int;
 
 -- VIEW
     -- ALIMENT

@@ -2,6 +2,13 @@
 
 class Regime_Model extends CI_Model
 {
+
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('authentification/Utilisateur_Model','utilisateur');
+        $this->load->model('authentification/Profil_Model','profil');
+    }
+
     public static $table = 'regime';
 
     public $id;
