@@ -29,7 +29,7 @@
 		public function lister_tout_categorie() {
 			$requete = $this->db->get("categorie_aliment");
 			$resultats = array();
-			$resultats_table = $requete->result_array();
+			$resultats_table = $requete->result_object();
 			foreach($resultats_table as $row) {
 				$resultats[] = $row;
 			}

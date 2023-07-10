@@ -50,6 +50,13 @@ create database regime;
         designation VARCHAR(50)
     );
 
+    create table if not exists plat_aliment(
+        id serial primary key,
+        id_plat INT references plat(id),
+        id_aliment INT references aliment(id),
+        pourcentage DOUBLE PRECISION
+    );
+
     
 -- ALTER
     -- UTILISATEUR
