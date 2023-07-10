@@ -72,6 +72,18 @@
             return $resultats;
         }
 
+		public function moyenne_calorique($tableau_activite) {
+			$total_calories = 0;
+			$count = count($tableau_activite);
+		
+			foreach ($tableau_activite as $activite) {
+				$total_calories += $activite->calorie_moyenne;
+			}
+		
+			$averageCalories = ($count > 0) ? $total_calories / $count : 0;
+			return $averageCalories;
+		}		
+
 	}
 
 ?>
