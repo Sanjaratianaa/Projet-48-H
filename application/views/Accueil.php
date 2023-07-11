@@ -1,29 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/parallax.css">
-    <link rel="stylesheet" href="./assets/css/accueil.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <title>Document</title>
-</head>
-<body class="bg-light">
-    
-    <div class="modal fade" id="tierModal_1" tabindex="-1" aria-labelledby="tierModalLabel_1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content p-4" style="border-radius:0">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="tierModalLabel_1" style="font-weight: 300;">Mettre a jour</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="">
-
-                </form>
+<div class="modal fade" id="tierModal_1" tabindex="-1" aria-labelledby="tierModalLabel_1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content p-4" style="border-radius:0">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="tierModalLabel_1" style="font-weight: 300;">Information de profil</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="<?=site_url('information/Profil/insertion')?>" method="get">
                 <div class="modal-body">
                     <div class="row mt-2">
                         <div class="form-group col-6">
@@ -38,8 +20,9 @@
                     <div class="form-group mt-4">
                         <label for="genre">Genre</label>
                         <select name="genre" class="form-select" id="genre">
-                            <option value="">Homme</option>
-                            <option value="">Femme</option>
+                            <?php foreach ($genres as $genre) { ?>
+                                <option value="<?=$genre->id?>"><?=$genre->designation?></option>
+                            <?php } ?>
                         </select>
                     </div>
                     <div class="form-group mt-4">
@@ -48,45 +31,22 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="boutton">
-                        <b>Modifier</b> 
+                    <button type="submit" class="boutton">
+                        <b>Soumettre</b> 
                     </button>
-                    <button type="button" class="btn"></button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-    <div class="row" style="z-index: 6;">
-        <div class="col-1 d-flex justify-content-center">
-            <div id="mySidenav" class="sidenav">
-
-                <a href="#" class="hover-underline-animation">About</a>
-                <a href="#" class="hover-underline-animation">Services</a>
-                <a href="#" class="hover-underline-animation">Clients</a>
-                <a href="#" class="hover-underline-animation">Contact</a>
-            </div>
-        </div>
-    </div>
-    <!--Navbar-->
-    <nav class="navbar navbar-light bg-light" style="color: #ad75b4; box-shadow: 0px 0px 8px #888888; position: fixed; width: 100%; z-index: 6;">
-        <!-- Collapse button -->
-        <button class="navbar-toggler hamburger-button" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" onclick="Nav()" style="z-index: 2">
-            <div class="animated-icon"><span></span><span></span><span></span></div>
-        </button>
-        <!-- Navbar brand -->
-        <div class="mx-auto order-0">
-            <a class="navbar-brand" style="color: #5f3763" href="#">PROJET 48 H</a>
-        </div>
-    </nav>
-
-    <div class="parallax" style="background-image: url('./assets/img/flat-lay-salad-weights.jpg'); min-height: 900px; ">
+</div>
+<div class="parallax" style="background-image: url('<?=base_url('affichage/assets/img/flat-lay-salad-weights.jpg')?>'); min-height: 900px; ">
         <div class="container my-5">
             <div class="row">
                 <div class="col-7 offset-1 p-5" style="color: white; margin-top: 25vh; background-color: #ffffffbd;"">
                     <div class="row">
                         <div class="title-text">
                             <h1 style="font-weight: 600; ">
-                                E-DIET, 
+                                E-DIET, <?=$profile?>
                             </h1><hr style="border-top: 10px solid #ad75b4;">
                             <h1>
                                 l'ultime <b>programme</b> pour atteindre vos <strong>objectifs</strong> de la manière la plus <b>optimale</b> !
@@ -105,16 +65,50 @@
                 
                 <div class="col-4">
                     <div class="row">
+
                         <div class="col-8 offset-3 p-4 my-box" style="margin-top: 30vh;">
-                            <div class="first-info">
-                                Vous êtes nouveau ?
-                                <hr>
-                                <button class="cssbuttons-io-button w-100 mt-4" type="submit" data-bs-toggle="modal" data-bs-target="#tierModal_1"> Premier profil
-                                    <div class="icon">
-                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
-                                    </div>
-                                </button>
-                            </div>
+                            <?php if($profile){ ?>
+                                <div class="first-info">
+                                    Vous êtes nouveau ?
+                                    <hr>
+                                    <button class="cssbuttons-io-button w-100 mt-4" type="submit" data-bs-toggle="modal" data-bs-target="#tierModal_1"> Premier profil
+                                        <div class="icon">
+                                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
+                                        </div>
+                                    </button>
+                                </div>
+                            <?php } ?>
+                            <?php if(!$profile){?>
+                                <div class="first-info">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <span>Poids:</span>
+                                            <span style="float: right"><?=$profil->poids?> Kg</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>Sexe:</span>
+                                            <span style="float: right"><?=$profil->sexe?></span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>Taille:</span>
+                                            <span style="float: right"><?=$profil->taille?> cm</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>Age:</span>
+                                            <span style="float: right"><?=$profil->age?> ans</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span legend="frequence d'activite sportive">fréquence:</span>
+                                            <span style="float: right"><?=$profil->frequence_activite?> / semaine</span>
+                                        </li>
+                                    </ul>
+                                    <button class="cssbuttons-io-button w-100 mt-4" type="submit" data-bs-toggle="modal" data-bs-target="#tierModal_1"> Mettre a jour
+                                        <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
+                                        </div>
+                                    </button>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -132,7 +126,7 @@
         </div>
     </div>
 
-    <div class="parallax" style="background-image: url('./assets/img/438099.jpg'); min-height: 400px; display: flex; align-items: center;">
+    <div class="parallax" style="background-image: url('<?=base_url('affichage/assets/img/438099.jpg')?>'); min-height: 400px; display: flex; align-items: center;">
         <div class="container">
             <div class="row w-75 m-auto">
                 <div class="p-4 my-box my-5">
@@ -156,8 +150,6 @@
         </div>
     </div>
     <div style="height: 700px;"></div>
-
-</body>
     <script>
         function Nav() {
             var width = document.getElementById("mySidenav").style.width;

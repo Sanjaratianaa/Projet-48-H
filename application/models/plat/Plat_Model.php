@@ -23,6 +23,11 @@
 
 		}
 
+		/**
+		 * @author Yoann
+		 * 
+		 */
+
 		public function lister_tout() {
 			$requete = $this->db->get(self::$table);
 			$resultats = array();

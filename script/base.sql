@@ -59,3 +59,10 @@ alter table profil add column frequence_activite int;
     -- ALIMENT
     create view v_categorie_aliment as 
         select a.id, a.id_categorie_aliment, c.designation as designation_categorie, a.designation as designation_aliment from aliment a join categorie_aliment c on a.id_categorie_aliment = c.id;
+
+select * from profil;
+
+select * from utilisateur;
+
+create or replace view v_profil as
+select profil.*, genre.designation sexe, extract(year from age(current_date, u.date_naissance)) AS age from profil join utilisateur u on profil.id_utilisateur = u.id join genre on profil.genre = genre.id order by date_report;
