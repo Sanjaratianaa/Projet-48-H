@@ -47,4 +47,17 @@ class Plat_Aliment_Model extends CI_Model
         return false;
     }
 
+    public function inserer_plat_aliment_trans($id_plat, $id_aliment, $pourcentage, $db){
+         $data = [
+            'id_plat' => $id_plat,
+            'id_aliment' => $id_aliment,
+            'pourcentage' => $pourcentage
+        ];
+
+        try {
+            $db->insert(self::$table, $data);
+        } catch (Exception $exception) {
+            throw $exception;
+        }
+    }
 }

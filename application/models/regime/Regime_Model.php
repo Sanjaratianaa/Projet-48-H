@@ -13,6 +13,7 @@ class Regime_Model extends CI_Model
 
     public $id;
     public $designation;
+    public $calorie_moyenne;
     public $id_regime;
     public $id_plat;
     public $designation_plat;
@@ -26,6 +27,7 @@ class Regime_Model extends CI_Model
             $regime = new Regime_Model();
             $regime->id = $row["id"];
             $regime->designation = $row["designation"];
+            $regime->calorie_moyenne = $row["calorie_moyenne"];
             $resultats[] = $regime;
         }
         return $resultats;
@@ -40,6 +42,7 @@ class Regime_Model extends CI_Model
             $plat_regime->id = $row["id"];
             $plat_regime->id_plat = $row["id_plat"];
             $plat_regime->id_regime = $row["id_regime"];
+            $plat_regime->calorie_moyenne = $row["calorie_moyenne"];
             $plat_regime->designation_plat = $row["designation_plat"];
             $plat_regime->designation_regime = $row["designation_regime"];
             $resultats[] = $plat_regime;
@@ -63,15 +66,17 @@ class Regime_Model extends CI_Model
         ];
 
         try {
+
             $this->db->insert('plat_regime', $data);
         } catch (Exception $exception) {
             throw $exception;
         }
     }
 
-    public function inserer_regime($designation){
+    public function inserer_regime($designation, $calorie_moyenne){
         $data = [
-            'designation' => $designation
+            'designation' => $designation,
+            'calorie_moyenne' => $calorie_moyenne
         ];
 
         try {
@@ -99,6 +104,7 @@ class Regime_Model extends CI_Model
             $plat_regime->id = $row["id"];
             $plat_regime->id_plat = $row["id_plat"];
             $plat_regime->id_regime = $row["id_regime"];
+            $plat_regime->calorie_moyenne = $row["calorie_moyenne"];
             $plat_regime->designation_plat = $row["designation_plat"];
             $plat_regime->designation_regime = $row["designation_regime"];
             $resultats[] = $plat_regime;
@@ -106,22 +112,23 @@ class Regime_Model extends CI_Model
         return $resultats;
     }
 
-    public function inserer($designation, $id_plats){
+    public function inserer($designation, $calorie_moyenne, $id_plats){
         if (empty($designation) || $designation == null){
             throw new Exception("La désignation est obligatoire");
         }
 
-        $id_regime = "select nextval('regime_id_seq')";
         $data = [
-            'designation' => $designation
+            'designation' => $designation,
+            'calorie_moyenne' => $calorie_moyenne
         ];
 
         try {
             $this->db->trans_start();
             $this->db->insert(self::$table, $data);
+            $id_regime = obtenir_sequence_value("regime_id_seq", $this->db);
             foreach ($id_plats as $id_plat){
                 $plat_regime = new Regime_Model();
-                $plat_regime->inserer_plat_regime($id_regime, $id_plat);
+                $plat_regime->inserer_plat_regime_trans($id_regime, $id_plat, $this->db);
             }
             $this->db->trans_complete();
         }catch ( Exception $exception ){
@@ -129,4 +136,26 @@ class Regime_Model extends CI_Model
             throw $exception;
         }
     }
+
+    public function inserer_plat_regime_trans($id_regime, $id_plat, $db){
+        if (empty($id_regime) || $id_regime == null){
+            throw new Exception("Le régime est obligatoire");
+        }
+
+        if (empty($id_plat) || $id_plat == null){
+            throw new Exception("Le plat est obligatoire");
+        }
+
+        $data = [
+            'id_regime' => $id_regime,
+            'id_plat' => $id_plat
+        ];
+
+        try {
+            $db->insert('plat_regime', $data);
+        } catch (Exception $exception) {
+            throw $exception;
+        }
+    }
+
 }
