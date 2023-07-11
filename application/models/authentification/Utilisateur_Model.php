@@ -79,6 +79,7 @@
 			}
 			return false;
 		}
+		
 
 		public function calcul_age($date_naissance) {
 			$dob = new DateTime($date_naissance);

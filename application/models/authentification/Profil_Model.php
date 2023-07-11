@@ -27,7 +27,8 @@
 				'poids' => $poids,
 				'genre' => $genre,
 				'taille' => $taille,
-				'date_report' => $this->format_date($date_report),
+				//'date_report' => $this->format_date($date_report),
+				'date_report' => $date_report,
 				'id_utilisateur' => $id_utilisateur,
 				'frequence_activite' => $frequence
 			];
@@ -114,13 +115,28 @@
 			return false;
 		}
 
-		public function si_null($id_utilisateur) {
+		/**
+		 * @author yoann
+		 */
+
+		 public function obtenir_profil($id_utilisateur){
+			$query = $this->db->get_where('v_profil', array('id_utilisateur' => $id_utilisateur), 1);
+			//return $this->db->last_query();
+
+			// Check if any row is returned
+			if ($query->num_rows() > 0) {
+				$row = $query->row();
+				return $row;
+			}else return false;
+		 }
+
+		public function est_null($id_utilisateur) {
 			$this->db->where('id_utilisateur',$id_utilisateur);
 			$requete = $this->db->get(self::$table);
 			if($requete->num_rows() > 0 ) {
-				return true;
+				return false;
 			}
-			return false;
+			return true;
 		}
 
 		public function obtenir($id_utilisateur) {
