@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="login-page">
-    <div class="form">
+    <div class="form login">
       <form class="register-form" method="post" action="<?=base_url('authentification/Registration/inscription')?>">
         <input type="text" placeholder="nom" name="nom"/>
         <input type="text" placeholder="prenom(s)" name="prenoms"/>
@@ -24,11 +24,13 @@
         <button>S'enregistrer</button>
         <p class="message">Deja enregistre? <a href="#">se connecter</a></p>
       </form>
-      <form class="login-form" action="<?=base_url('authentification/Login/Connexion_Utilisateur')?>" method="post">
-        <input type="email" placeholder="exemple@wholly.online" name="mail"/>
-        <input type="password" placeholder="mot de passe" name="mot_de_passe"/>
+      <form class="login-form" id="login-form" action="<?=base_url('authentification/Login/Connexion_Utilisateur')?>" method="post">
+        <input type="email" placeholder="exemple@wholly.online" name="mail" id="mail" value="bema@gmail.com/>
+        <input type="password" placeholder="mot de passe" name="mot_de_passe" id="mot_de_passe" value="bema"/>
         <button>login</button>
-        <p class="message">Pas encore enregistre? <a href="#">S'inscrire</a></p>
+        <p class="message" id="message">Pas encore enregistre? <a href="#">S'inscrire</a></p>
+        <p class="admin" id="admin"><a href="#">Administrateur </a></p>
+        <p class="utilisateur" id="utilisateur" style="display:none; "><a href="#">Utilisateur </a></p>
       </form>
     </div>
   </div>
@@ -37,6 +39,39 @@
     $('.message a').click(function(){
         $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
         });
+    
+    $('.admin a').click(function(){
+      let url = "<?=base_url('authentification/Login/Connexion_Administrateur'); ?>";
+      let message = document.getElementById("message");
+      let utilisateur = document.getElementById("utilisateur");
+      let admin = document.getElementById("admin");
+
+      document.getElementById("mail").value = "admin@gmail.com";
+      document.getElementById("mot_de_passe").value = "admin";
+
+      message.style.display = "none";
+      admin.style.display = "none";
+      utilisateur.style.display = "block";
+
+      document.getElementById("login-form").action = url;
+    });
+
+    $('.utilisateur a').click(function(){
+      let url = "<?=base_url('authentification/Login/Connexion_Utilisateur'); ?>";
+      let message = document.getElementById("message");
+      let utilisateur = document.getElementById("utilisateur");
+      let admin = document.getElementById("admin");
+
+      document.getElementById("mail").value = "bema@gmail.com";
+      document.getElementById("mot_de_passe").value = "bema";
+
+      message.style.display = "block";
+      admin.style.display = "block";
+      utilisateur.style.display = "none";
+
+      document.getElementById("login-form").action = url; 
+    });
+    
   </script>
   </body>
 </html>

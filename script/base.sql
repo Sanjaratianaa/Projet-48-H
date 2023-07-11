@@ -1,7 +1,6 @@
 --create database regime;
 --\c regime
 
-
 -- TABLES
     create table genre(
         id SERIAL PRIMARY KEY,
@@ -69,7 +68,7 @@ alter table profil add column frequence_activite int;
     create table if not exists regime(
         id serial primary key,
         designation VARCHAR(50),
-        calorie_moyenne DOUBLE PRECISION
+        calorie_moyenne double precision
     );
 
     create table if not exists plat_regime(
@@ -127,8 +126,9 @@ alter table profil add column frequence_activite int;
     -- ALIMENT
     create or replace view v_categorie_aliment as
         select a.id, a.id_categorie_aliment, c.designation as designation_categorie, a.designation as designation_aliment from aliment a join categorie_aliment c on a.id_categorie_aliment = c.id;
+
     create or replace view v_plat_regime as
-        select pr.id, pr.id_plat, pr.id_regime, r.calorie_moyenne, r.designation as designation_regime, p.designation as designation_plat from plat_regime pr join regime r on pr.id_regime = r.id join plat p on pr.id_plat = p.id;
+        select pr.id, pr.id_plat, pr.id_regime, r.calorie_moyenne, r.designation as designation_regime, p.designation as designation_plat from plat_regime pr join regime r on pr.id_regime = r.id join plat p 
     create or replace view v_code_valide as
         SELECT code_argent.*, sous_requete.id_code_demande, sous_requete.id_utilisateur, sous_requete.id_administrateur, sous_requete.date_validation, sous_requete.date_demande
             FROM code_argent 
@@ -154,3 +154,17 @@ alter table profil add column frequence_activite int;
         select u.*, cd.id as id_demande, cd.id_utilisateur, cd.date_demande from utilisateur u join v_code_valide cd on u.id = cd.id_utilisateur;
     create or replace view v_code_invalide_user as
         select u.*, cd.id as id_demande, cd.id_utilisateur, cd.date_demande from utilisateur u join v_code_invalide cd on u.id = cd.id_utilisateur;
+
+    create or replace view v_profil as
+        select profil.*, genre.designation sexe, extract(year from age(current_date, u.date_naissance)) AS age 
+            from profil 
+                join utilisateur u on profil.id_utilisateur = u.id 
+                join genre on profil.genre = genre.id order by date_report;
+
+    create view v_plat_aliment as
+        select
+            p.id id_plat, designation designation_plat, c_a.id aliment, designation_aliment,
+            pourcentage, id_categorie_aliment, designation_categorie
+                from plat_aliment
+                    join v_categorie_aliment c_a on c_a.id = id_aliment
+                    join plat p on plat_aliment.id_plat = p.id;

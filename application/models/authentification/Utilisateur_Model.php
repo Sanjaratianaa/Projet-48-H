@@ -5,6 +5,8 @@
 		public function __construct() {
 			parent::__construct();
 			$this->load->model('authentification/Profil_Model','profil');
+			$this->load->model('activite/Intensite_Physique_Model','intensite_physique');
+			$this->load->model('activite/Activite_Model','activite');
 		}
 
 		public static $table = 'utilisateur';
@@ -78,6 +80,17 @@
 				return $requete->row();
 			}
 			return false;
+		}
+
+		/**
+		 * @author Yoann
+		 * 
+		 */
+		public function lister_activites_approprie($utilisateur){
+			$profil = $this->profil->obtenir_profil($utilisateur->id);
+			$intensite = $this->intensite_physique->obtenir_par_frequence($profil->frequence_activite);
+			$activites = $this->activite->lister_par_intensite($intensite);
+			return $activites;
 		}
 		
 

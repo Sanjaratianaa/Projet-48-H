@@ -28,7 +28,7 @@ class Welcome extends CI_Controller {
 	{
 		if(!isset($_SESSION['utilisateur'])){
 			redirect(site_url('authentification/Login'));
-		}else $this->load->view('welcome_message');
+		}else redirect(site_url('accueil'));
 	}
 
 	public function test()

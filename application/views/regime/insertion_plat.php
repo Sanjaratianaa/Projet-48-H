@@ -1,3 +1,35 @@
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ajout de plat</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" class="form" id="form-modal">
+                            <div class="row text-center">
+                                <h3 class="text-center">
+                                    Choisir un plat
+                                </h3>
+                            </div>
+                            <div class="my-3">
+                                <select id="plat" name="plat" class="form-select">
+                                    <?php foreach ($plats as $plat) {?>
+                                        <option value="<?php echo $plat->id;?>,<?php echo $plat->designation;?>"><?php echo $plat->designation;?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                        <button type="button" class="btn btn-primary" onclick="ajout_details()" data-bs-dismiss="modal">Ajouter un plat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 <form method="post" action="<?php echo base_url('regime/Regime/inserer_plat_regime');?>">
 
 </form>
@@ -43,36 +75,6 @@
 
         <!-- Button trigger modal -->
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ajout de plat</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" class="form" id="form-modal">
-                            <div class="row text-center">
-                                <h3 class="text-center">
-                                    Choisir un plat
-                                </h3>
-                            </div>
-                            <div class="my-3">
-                                <select id="plat" name="plat" class="form-select">
-                                    <?php foreach ($plats as $plat) {?>
-                                        <option value="<?php echo $plat->id;?>,<?php echo $plat->designation;?>"><?php echo $plat->designation;?></option>
-                                    <?php }?>
-                                </select>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                        <button type="button" class="btn btn-primary" onclick="ajout_details()" data-bs-dismiss="modal">Ajouter un plat</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
     </div>
