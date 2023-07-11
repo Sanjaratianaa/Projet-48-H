@@ -6,6 +6,7 @@ class Regime extends CI_Controller{
             parent::__construct();
             $this->load->model('regime/Regime_Model' , 'regime');
             $this->load->model('plat/Plat_Model' , 'plat');
+            $this->load->model('activite/Activite_Model' , 'activite');
         }
 
         public function index(){
@@ -47,6 +48,7 @@ class Regime extends CI_Controller{
             $objectif = $_GET['objectif'];
             $regime_o = $this->regime->obtenir_regime_approprie($_SESSION['utilisateur'], $objectif);
             $plats = $this->regime->obtenir_plats($regime_o->id);
+            $_SESSION['activites'] = $this->utilisateur->lister_activites_approprie($_SESSION['utilisateur']);
             $plat_categories = array();
             foreach ($plats as $plat) {
                 $id_plat = $plat->id;

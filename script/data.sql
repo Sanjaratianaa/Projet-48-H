@@ -109,3 +109,6 @@
             insert into activite values(default,'Natation Intense',800,10,'01:00:00');
             insert into activite values(default,'Entrainement en salle de musculation',600,10,'01:00:00');
             insert into activite values(default,'Escalade',700,10,'01:00:00');
+
+insert into plat_aliment(id_plat, id_aliment, pourcentage)
+values (1, 10, 25),(1, 20, 20), (1, 18, 20), (1, 22, 10), (1, 21, 5), (1, 26, 10);

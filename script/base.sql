@@ -1,6 +1,6 @@
 --create database regime;
 --\c regime
-
+select * from activite;
 -- TABLES
     create table genre(
         id SERIAL PRIMARY KEY,
@@ -156,10 +156,22 @@ alter table profil add column frequence_activite int;
                 join utilisateur u on profil.id_utilisateur = u.id 
                 join genre on profil.genre = genre.id order by date_report;
 
-    create view v_plat_aliment as
+    create or replace view v_plat_aliment as
         select
             p.id id_plat, designation designation_plat, c_a.id aliment, designation_aliment,
             pourcentage, id_categorie_aliment, designation_categorie
                 from plat_aliment
                     join v_categorie_aliment c_a on c_a.id = id_aliment
                     join plat p on plat_aliment.id_plat = p.id;
+
+create or replace view v_plat_aliment as
+select p.id id_plat, designation designation_plat, c_a.id aliment, designation_aliment, pourcentage, id_categorie_aliment, designation_categorie from plat_aliment
+    join v_categorie_aliment c_a on c_a.id = id_aliment
+    join plat p on plat_aliment.id_plat = p.id;
+
+
+
+create or replace view v_categorie_plat as
+select id_plat, designation_plat, id_categorie_aliment, designation_categorie, sum(pourcentage) pourcentage
+    from v_plat_aliment
+        group by id_categorie_aliment, designation_categorie, id_plat, designation_plat;

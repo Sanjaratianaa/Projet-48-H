@@ -1,11 +1,9 @@
 <footer class="py-3 my-4 bg-light">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">ETU - 1946</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">ETU - 1999</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">ETU - 2028</a></li>
     </ul>
-    <p class="text-center text-muted">© 2022 Company, Inc</p>
+    <p class="text-center text-muted">© 2022 Projet 48 H, Inc</p>
   </footer>
   

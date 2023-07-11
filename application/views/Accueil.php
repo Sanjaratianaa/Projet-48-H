@@ -216,11 +216,37 @@
                         <?php foreach($_SESSION['regime_categories'][$plat->id] as $cat){ ?>
                         <tr class="product-index">
                             <td></td>
-                            <td colspan="2"></td>
+                            <td></td>
                             <td style="text-align: left">- <?=$cat->designation_categorie?></td>
+                            <td></td>
                             <td style="text-align: left"><?=$cat->pourcentage?> %</td>
                         </tr>
                         <?php } ?>
+                    <?php } ?>
+                </tbody>
+                <thead>
+                    <tr class="product-index product-title">
+                    <td scope="col"><strong style="color: #5f3763">Activites physique(s) 1h par jour au choix :</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($_SESSION['activites'] as $activite) { ?>
+                        <tr class="product-index">
+                            <td>
+                            </td>
+                            <td></td>
+                            <td style="text-align: left">
+                                - <?=$activite->designation?>
+                            </td>
+                            <td></td>
+                            <td style="text-align: left">
+                                <?=$activite->calorie_moyen?>
+                            </td>
+                        </tr>
                     <?php } ?>
                 </tbody>
                 </table>
