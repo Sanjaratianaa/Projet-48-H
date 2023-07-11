@@ -1,4 +1,8 @@
 -- DATA
+    -- UTILISATEUR
+        insert into utilisateur values(default,'RAKOTO','bema','bema@gmail.com','bema');
+        insert into utilisateur values(default,'RABE','Lita','lita@gmail.com','lita');
+
     -- GENRE
         insert into genre values(default,'Femme');
         insert into genre values(default,'Masculin');

@@ -25,8 +25,8 @@
         <p class="message">Deja enregistre? <a href="#">se connecter</a></p>
       </form>
       <form class="login-form" id="login-form" action="<?=base_url('authentification/Login/Connexion_Utilisateur')?>" method="post">
-        <input type="email" placeholder="exemple@wholly.online" name="mail" id="mail"/>
-        <input type="password" placeholder="mot de passe" name="mot_de_passe" id="mot_de_passe"/>
+        <input type="email" placeholder="exemple@wholly.online" name="mail" id="mail" value="bema@gmail.com/>
+        <input type="password" placeholder="mot de passe" name="mot_de_passe" id="mot_de_passe" value="bema"/>
         <button>login</button>
         <p class="message" id="message">Pas encore enregistre? <a href="#">S'inscrire</a></p>
         <p class="admin" id="admin"><a href="#">Administrateur </a></p>
@@ -62,8 +62,8 @@
       let utilisateur = document.getElementById("utilisateur");
       let admin = document.getElementById("admin");
 
-      document.getElementById("mail").value = "myah@gmail.com";
-      document.getElementById("mot_de_passe").value = "myah";
+      document.getElementById("mail").value = "bema@gmail.com";
+      document.getElementById("mot_de_passe").value = "bema";
 
       message.style.display = "block";
       admin.style.display = "block";
