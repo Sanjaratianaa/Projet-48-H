@@ -39,6 +39,21 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="tierModal_2" tabindex="-1" aria-labelledby="tierModalLabel_1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog modal-lg">
+        <div class="modal-content p-4" style="border-radius:0">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="tierModalLabel_2" style="font-weight: 300;">Information de profil</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="parallax" style="background-image: url('<?=base_url('affichage/assets/img/flat-lay-salad-weights.jpg')?>'); min-height: 900px; ">
         <div class="container my-5">
             <div class="row">
@@ -136,20 +151,56 @@
                         </svg>  <span style="float: right;">Ce que vous recherchez !</span>
                       </div><hr>
                     <div>
-                        <form action="">
-                            <input type="text" placeholder="Objectif, exemple -10kg..." class="form-control">
+                        <form action="<?=site_url('regime/Regime/regime_recherche')?>" method="get">
+                            <input type="text" placeholder="Objectif, exemple -10kg..." name="objectif" class="form-control">
+                            <button class="cssbuttons-io-button w-100 mt-4" type="submit" > <span>Essayer !</span>
+                                <div class="icon">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
+                                </div>
+                            </button>
                         </form>
-                        <button class="cssbuttons-io-button w-100 mt-4" type="submit" > <span>Essayer !</span>
-                            <div class="icon">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
-                            </div>
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div style="height: 700px;"></div>
+    <div class="container">
+        <div class="row"></div>
+    </div>
+    <div style="height: 700px;">
+        <?php if(isset($_SESSION['regime_optimal'])){ 
+            
+        } ?>
+        <div class="col-8 offset-1 p-4 my-box">
+            <div class="my-box-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-basket3-fill" viewBox="0 0 16 16">
+                <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.468 15.426.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z"/>
+            </svg>  <span style="float: right;"><?=$_SESSION['regime_optimal']->id;?></span>
+            </div><hr>
+            <table class="table" id="invoice">
+            <thead>
+                <tr class="product-index product-title">
+                <td scope="col">Plat</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($_SESSION['regime_plats'] as $plat) { ?>
+                    <tr class="product-index">
+                        <td><?=$plat->designation?></td>
+                        <td colspan="2"></td>
+                        <td><?=$_SESSION['regime_categories'][$plat->id][0]->designation_categorie?></td>
+                        <td><?=$_SESSION['regime_categories'][$plat->id][0]->pourcentage?> %</td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+            </table>
+        </div>
+        <button data-bs-toggle="modal" data-bs-target="#tierModal_2">ok</button>
+    </div>
     <script>
         function Nav() {
             var width = document.getElementById("mySidenav").style.width;

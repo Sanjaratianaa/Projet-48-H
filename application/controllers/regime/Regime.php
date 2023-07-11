@@ -40,6 +40,27 @@ class Regime extends CI_Controller{
             $this->load->view("template/index", $this->data);
         }
 
+        public function regime_recherche(){
+            if(!isset($_SESSION['utilisateur']) || !isset($_GET['objectif'])){
+                redirect(site_url('accueil?error_regime'));
+            }
+            $objectif = $_GET['objectif'];
+            $regime_o = $this->regime->obtenir_regime_approprie($_SESSION['utilisateur'], $objectif);
+            $plats = $this->regime->obtenir_plats($regime_o->id);
+            $plat_categories = array();
+            foreach ($plats as $plat) {
+                $id_plat = $plat->id;
+                if(!isset($plat_categories[$id_plat])){
+                    $plat_categories[$id_plat] = array();
+                }
+                $plat_categories[$id_plat] = $this->plat->obtenir_plats_categorie($id_plat);
+            }
+            $_SESSION['regime_plats'] = $plats;
+            $_SESSION['regime_categories'] = $plat_categories;
+            $_SESSION['regime_optimal'] = $regime_o;
+            redirect(site_url('accueil'));
+        }
+
         public function inserer_plat_regime(){
             $id_plat = $this->input->post('id_plat');
             $designation = $this->session->userdata('designation');

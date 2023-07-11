@@ -50,7 +50,7 @@
             $this->db->where("id_intensite", $id_intensite);
 			$requete = $this->db->get(self::$table);
 			$resultats = array();
-			$resultats_table = $requete->result_object();
+			$resultats_table = $requete->result_array();
 			foreach($resultats_table as $row) {
 				$activite = new Activite_Model();
 				$activite->id = $row["id"];

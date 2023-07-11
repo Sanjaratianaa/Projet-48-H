@@ -8,6 +8,7 @@ class Accueil extends CI_Controller {
 		$this->load->model('authentification/Utilisateur_Model' , 'utilisateur');
 		$this->load->model('authentification/Administrateur_Model' , 'administrateur');
 		$this->load->model('authentification/Profil_Model' , 'profil');
+                $this->load->model('regime/Regime_Model' , 'regime');
         $this->load->model('information/Genre_Model', 'genre');
         if(!isset($_SESSION['utilisateur'])){
 			redirect(site_url('authentification/Login'));

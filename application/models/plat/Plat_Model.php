@@ -54,8 +54,18 @@
     }
 		/**
 		 * @author Yoann
-		 * 
+		 * Plats et categorie et pourcentage
 		 */
+	
+		 public function obtenir_plats_categorie($id_plat){
+			$requete = $this->db->get_where('v_categorie_plat', array('id_plat' => $id_plat));
+			$resultats = array();
+			$results = $requete->result();
+			foreach ($results as $resultat) {
+				$resultats[] = $resultat;
+			}
+			return $resultats;
+		 }
 
 		public function lister_tout() {
 			$requete = $this->db->get(self::$table);
