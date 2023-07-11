@@ -145,6 +145,9 @@
 
 		public function obtenir_perte_necessaire($objectif) {
 			if(strpos($objectif, "-") !== false) {
+				if(abs($objectif) > 10) {
+					return 1500;
+				}
 				return 1000;
 			}else{
 				return 500;
@@ -157,6 +160,52 @@
 			$perte_necessaire = $this->obtenir_perte_necessaire($objectif);
 			$resultat = $calorie_usuel + $perte_necessaire;
 			return $resultat;
+		}
+
+		public function obtenir_imc_actuel($utilisateur) {
+			$profil = new Profil_Model();
+			$profil_recent = $profil->obtenir($utilisateur->id);
+		
+			$poids = $profil_recent->poids;
+			$taille = $profil_recent->taille;
+		
+			$tailleEnMetre = $taille/100;
+		
+			$IMC = $poids / ($tailleEnMetre * $tailleEnMetre);
+		
+			return $IMC;
+		}
+		
+		-- // poids_normal >> IMC entre 18,5 et 24,9
+		
+		public function calculer_perte_poids_imc($poids, $taille) {
+			$tailleEnMetre = $taille / 100;
+			$poids_cible = 24.9 * ($tailleEnMetre * $tailleEnMetre);
+			$pertePoids = $poids - $poids_cible;
+			return $pertePoids;
+		}
+		
+		public function calculer_gain_poids_imc($poids, $taille) {
+			$tailleEnMetre = $taille / 100;
+			$poids_cible = 18.5 * ($tailleEnMetre * $tailleEnMetre);
+			$gainPoids = $poids_cible - $poids;
+			return $gainPoids;
+		}
+		
+		public function atteindre_imc_ideal($utilisateur) {
+			$profil = new Profil_Model();
+			$profil_recent = $profil->obtenir($utilisateur->id);
+		
+			$poids = $profil_recent->poids;
+			$taille = $profil_recent->taille;
+		
+			$imc_actuel = $this->obtenir_imc_actuel($utilisateur);
+			if($imc_actuel < 18.5){
+				return $this->calculer_gain_poids_imc($poids, $taille);
+			}else if($imc_actuel > 24.9) {
+				return '-'.$this->calculer_perte_poids_imc($poids, $taille);
+			}
+			return false;
 		}
 
 	}
