@@ -96,7 +96,7 @@
 			$this->db->where('id_utilisateur',$id_utilisateur);
 			$requete = $this->db->get(self::$table);
 			if($requete->num_rows() > 0 ) {
-				$dernier = $requete->$last_row();
+				$dernier = $requete->last_row();
 				return $dernier;
 			}
 			return false;
@@ -115,7 +115,7 @@
 			$this->db->where('id_utilisateur',$id_utilisateur);
 			$requete = $this->db->get(self::$table);
 			if($requete->num_rows() > 0 ) {
-				$dernier = $requete->$last_row();
+				$dernier = $requete->last_row();
 				return $dernier;
 			}
 			return false;

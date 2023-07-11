@@ -89,11 +89,11 @@
 			$count = count($tableau_activite);
 		
 			foreach ($tableau_activite as $activite) {
-				$total_calories += $activite->calorie_moyenne;
+				$total_calories += $activite->calorie_moyen;
 			}
 		
-			$averageCalories = ($count > 0) ? $total_calories / $count : 0;
-			return $averageCalories;
+			$moyenne = ($count > 0) ? $total_calories / $count : 0;
+			return $moyenne;
 		}		
 
 	}
