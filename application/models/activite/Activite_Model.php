@@ -33,9 +33,15 @@
 		public function lister_tout() {
 			$requete = $this->db->get(self::$table);
 			$resultats = array();
-			$resultats_table = $requete->result_object();
+			$resultats_table = $requete->result_array();
 			foreach($resultats_table as $row) {
-				$resultats[] = $row;
+				$activite = new Activite_Model();
+				$activite->id = $row["id"];
+				$activite->designation = $row["designation"];
+				$activite->calorie_moyen = $row["calorie_moyen"];
+				$activite->id_intensite = $row["id_intensite"];
+				$activite->duree = $row["duree"];
+				$resultats[] = $activite;
 			}
 			return $resultats;
 		}
@@ -46,7 +52,13 @@
 			$resultats = array();
 			$resultats_table = $requete->result_object();
 			foreach($resultats_table as $row) {
-				$resultats[] = $row;
+				$activite = new Activite_Model();
+				$activite->id = $row["id"];
+				$activite->designation = $row["designation"];
+				$activite->calorie_moyen = $row["calorie_moyen"];
+				$activite->id_intensite = $row["id_intensite"];
+				$activite->duree = $row["duree"];
+				$resultats[] = $activite;
 			}
 			return $resultats;
 		}
