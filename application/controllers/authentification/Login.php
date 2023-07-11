@@ -37,7 +37,7 @@ class Login extends CI_Controller {
 		$mail = "";
 		$mot_de_passe = "";
         $administrateur = new Administrateur_Model();
-		$resultat = $utilisateur->Validation_Connexion($mail, $mot_de_passe);
+		$resultat = $administrateur->Validation_Connexion($mail, $mot_de_passe);
 		$this->session->set_userdata("administrateur",$resultat);
 		return "";
 	}
