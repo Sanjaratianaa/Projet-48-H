@@ -1,6 +1,7 @@
 create database regime;
 \c regime
 
+
 -- TABLES
     create table genre(
         id SERIAL PRIMARY KEY,
@@ -57,7 +58,8 @@ create database regime;
 
     create table if not exists regime(
         id serial primary key,
-        designation VARCHAR(50)
+        designation VARCHAR(50),
+        calorie_moyenne DOUBLE PRECISION
     );
 
     create table if not exists plat_regime(
@@ -93,6 +95,5 @@ create database regime;
     -- ALIMENT
     create or replace view v_categorie_aliment as
         select a.id, a.id_categorie_aliment, c.designation as designation_categorie, a.designation as designation_aliment from aliment a join categorie_aliment c on a.id_categorie_aliment = c.id;
-
     create or replace view v_plat_regime as
-        select pr.id, pr.id_plat, pr.id_regime, r.designation as designation_regime, p.designation as designation_plat from plat_regime pr join regime r on pr.id_regime = r.id join plat p on pr.id_plat = p.id;
+        select pr.id, pr.id_plat, pr.id_regime, r.calorie_moyenne, r.designation as designation_regime, p.designation as designation_plat from plat_regime pr join regime r on pr.id_regime = r.id join plat p on pr.id_plat = p.id;
