@@ -6,6 +6,7 @@ class Welcome extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('activite/Intensite_Physique_Model' , 'intensite');
+		$this->load->model('activite/Activite_Model' , 'activite');
 	}
 
 	/**
@@ -25,13 +26,16 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		if(!isset($_SESSION['utilisateur'])){
+			redirect(site_url('authentification/Login'));
+		}else $this->load->view('welcome_message');
 	}
 
 	public function test()
 	{
 		$res = $this->intensite->obtenir_par_frequence('Infinity');
-		print_r($res);
+		// print_r($res);
+		// $this->activite->inserer('test INsertion', 120, 1,'01:30:00');
 		$this->load->view('welcome_message');
 	}
 }

@@ -23,35 +23,39 @@
 
 		}
 
-        public function inserer_plat_aliment($designation, $id_aliments, $pourcentage){
-            if (empty($designation) || $designation == null){
-                throw new Exception("La désignation est obligatoire");
-            }
-            if (empty($id_aliments) || $id_aliments == null){
-                throw new Exception("L'aliment est obligatoire");
-            }
-            if (empty($pourcentage) || $pourcentage == null){
-                throw new Exception("Le pourcentage est obligatoire");
-            }
-
-            $data = [
-                'designation' => $designation
-            ];
-
-            try {
-                $this->db->trans_start();
-                $this->db->insert(self::$table, $data);
-                $id_plat = obtenir_sequence_value("plat_id_seq", $this->db);
-                foreach ($id_aliments as $id_aliment){
-                    $plat_aliment = new Plat_Aliment_Model();
-                    $plat_aliment->inserer_plat_aliment_trans($id_plat, $id_aliment, $pourcentage, $this->db);
-                }
-                $this->db->trans_complete();
-            }catch ( Exception $exception ){
-                $this->db->trans_rollback();
-                throw $exception;
-            }
+    public function inserer_plat_aliment($designation, $id_aliments, $pourcentage){
+        if (empty($designation) || $designation == null){
+            throw new Exception("La désignation est obligatoire");
         }
+        if (empty($id_aliments) || $id_aliments == null){
+            throw new Exception("L'aliment est obligatoire");
+        }
+        if (empty($pourcentage) || $pourcentage == null){
+            throw new Exception("Le pourcentage est obligatoire");
+        }
+
+        $data = [
+            'designation' => $designation
+        ];
+
+        try {
+            $this->db->trans_start();
+            $this->db->insert(self::$table, $data);
+            $id_plat = obtenir_sequence_value("plat_id_seq", $this->db);
+            foreach ($id_aliments as $id_aliment){
+                $plat_aliment = new Plat_Aliment_Model();
+                $plat_aliment->inserer_plat_aliment_trans($id_plat, $id_aliment, $pourcentage, $this->db);
+            }
+            $this->db->trans_complete();
+        }catch ( Exception $exception ){
+            $this->db->trans_rollback();
+            throw $exception;
+        }
+    }
+		/**
+		 * @author Yoann
+		 * 
+		 */
 
 		public function lister_tout() {
 			$requete = $this->db->get(self::$table);

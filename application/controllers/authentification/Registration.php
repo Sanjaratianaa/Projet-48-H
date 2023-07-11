@@ -24,23 +24,21 @@ class Registration extends CI_Controller {
 	public function inscription(){
 		$utilisateur = new Utilisateur_Model();
 
-		$nom = "Anjaratiana";
-		$prenoms = "Layah";
-		$mail = "layah@gmail.com";
-		$mot_de_passe = "1234";
-		$confirmation = "1234";
-		$date_naissance = "10-10-2000";
+		$nom = $_POST['nom'];
+		$prenoms = $_POST['prenoms'];
+		$mail = $_POST['mail'];
+		$mot_de_passe = $_POST['mot_de_passe'];
+		$confirmation = $_POST['confirmation'];
+		$date_naissance = $_POST['date_naissance'];
 			
 		if($this->validation_MotDePasse($mot_de_passe, $confirmation))
 		{
 			if($utilisateur->Validate_Email($mail))
 			{
 				$utilisateur->insert($nom, $prenoms, $mail, $mot_de_passe, $date_naissance);
-			}
-		}
-		
-		return "";
-
+			}else redirect(site_url('authentification/login?error'));
+		}else redirect(site_url('authentification/login?error'));
+		redirect(site_url('authentification/login?success'));
 	}
 
 }

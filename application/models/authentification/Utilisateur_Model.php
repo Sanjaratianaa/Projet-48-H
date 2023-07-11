@@ -79,13 +79,15 @@
 			}
 			return false;
 		}
+		
 
 		public function calcul_age($date_naissance) {
 			$dob = new DateTime($date_naissance);
-			$currentDate = new DateTime();
-			$age = $currentDate->diff($dob)->y;
+			$annee_recent = date('Y');
+			$annee_naissance = $dob->format('Y');
+			$age = $annee_recent - $annee_naissance;
 			return $age;
-		}
+		}		
 
 		public function calcul_Taux_Metabolisme_Base($genre, $poids, $age, $taille) {
 			$TMB = 0;
@@ -111,7 +113,7 @@
 
 		public function obtenir_calorie_usuel($utilisateur) {
 			$profil = new Profil_Model();
-			$profil_recent = $profil->obtenir($utilisateur->$id);
+			$profil_recent = $profil->obtenir($utilisateur->id);
 			$age = $this->calcul_age($utilisateur->date_naissance);
 
 			$TMB = $this->calcul_Taux_Metabolisme_Base($profil_recent->genre, $profil_recent->poids, $age, $profil_recent->taille);

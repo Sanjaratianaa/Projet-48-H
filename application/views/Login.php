@@ -4,33 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= base_url('/assets/bootstrap/css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?=base_url('affichage/assets/css/style.css')?>">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
-    
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <h4>Login Page</h4>
-            <form action="post">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" name="email" placeholder="Please your email!">
-                </div>
-                <div class="form-group">
-                    <label for="mot-de-passe">Mot de passe</label>
-                    <input type="text" class="form-control" name="mot-de-passe" placeholder="Please your password!">
-                </div>
-                <br>
-                <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit">Login</button>
-                </div>
-                <a href="<?= site_url('authentification/Registration')?>">Sign Up</a>
-            </form>
-        </div>
+<div class="login-page">
+    <div class="form">
+      <form class="register-form" method="post" action="<?=base_url('authentification/Registration/inscription')?>">
+        <input type="text" placeholder="nom" name="nom"/>
+        <input type="text" placeholder="prenom(s)" name="prenoms"/>
+        <input type="text" placeholder="email address" name="mail"/>
+        <input type="password" placeholder="mot de passe" name="mot_de_passe"/>
+        <input type="password" placeholder="confirmer mot de passe" name="confirmation"/>
+        <label for="date_naissance" style="font-weight: 190;">Date de naissance</label>
+        <input type="date" name="date_naissance" placeholder="date de naissance" id="date_naissance">
+        <button>S'enregistrer</button>
+        <p class="message">Deja enregistre? <a href="#">se connecter</a></p>
+      </form>
+      <form class="login-form" action="<?=base_url('authentification/Login/Connexion_Utilisateur')?>" method="post">
+        <input type="email" placeholder="exemple@wholly.online" name="mail"/>
+        <input type="password" placeholder="mot de passe" name="mot_de_passe"/>
+        <button>login</button>
+        <p class="message">Pas encore enregistre? <a href="#">S'inscrire</a></p>
+      </form>
     </div>
-</div>
+  </div>
 
-</body>
+  <script>
+    $('.message a').click(function(){
+        $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+        });
+  </script>
+  </body>
 </html>

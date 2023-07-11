@@ -27,7 +27,8 @@
 				'poids' => $poids,
 				'genre' => $genre,
 				'taille' => $taille,
-				'date_report' => $this->format_date($date_report),
+				//'date_report' => $this->format_date($date_report),
+				'date_report' => $date_report,
 				'id_utilisateur' => $id_utilisateur,
 				'frequence_activite' => $frequence
 			];
@@ -62,11 +63,23 @@
 				if($frequence < 0) throw new Exception("La frequence d'activite est negatif!");
 				$data['frequence_activite']=$frequence;
 			}
-
 			$data['date_report'] = $this->format_date($date);
 
 			try {
 				$this->db->update(self::$table, $data);
+			} catch (Exception $exception) {
+				throw $exception;
+			}
+		}
+
+		public function delete($id_utilisateur, $id_profil) {
+			$data = array(
+				'id_utilisateur' => $id_utilisateur,
+				'id_profil' => $id_profil
+			);
+		
+			try {
+				$this->db->where($data)->delete(self::$table);
 			} catch (Exception $exception) {
 				throw $exception;
 			}
@@ -96,26 +109,41 @@
 			$this->db->where('id_utilisateur',$id_utilisateur);
 			$requete = $this->db->get(self::$table);
 			if($requete->num_rows() > 0 ) {
-				$dernier = $requete->$last_row();
+				$dernier = $requete->last_row();
 				return $dernier;
 			}
 			return false;
 		}
 
-		public function si_null($id_utilisateur) {
+		/**
+		 * @author yoann
+		 */
+
+		 public function obtenir_profil($id_utilisateur){
+			$query = $this->db->get_where('v_profil', array('id_utilisateur' => $id_utilisateur), 1);
+			//return $this->db->last_query();
+
+			// Check if any row is returned
+			if ($query->num_rows() > 0) {
+				$row = $query->row();
+				return $row;
+			}else return false;
+		 }
+
+		public function est_null($id_utilisateur) {
 			$this->db->where('id_utilisateur',$id_utilisateur);
 			$requete = $this->db->get(self::$table);
 			if($requete->num_rows() > 0 ) {
-				return true;
+				return false;
 			}
-			return false;
+			return true;
 		}
 
 		public function obtenir($id_utilisateur) {
 			$this->db->where('id_utilisateur',$id_utilisateur);
 			$requete = $this->db->get(self::$table);
 			if($requete->num_rows() > 0 ) {
-				$dernier = $requete->$last_row();
+				$dernier = $requete->last_row();
 				return $dernier;
 			}
 			return false;

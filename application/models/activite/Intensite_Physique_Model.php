@@ -29,24 +29,39 @@
 		public function lister_tout() {
 			$requete = $this->db->get(self::$table);
 			$resultats = array();
-			$resultats_table = $requete->result_object();
+			$resultats_table = $requete->result_array();
 			foreach($resultats_table as $row) {
-				$resultats[] = $row;
+				$intensite_physique = new Intensite_Physique_Model();
+				$intensite_physique->id = $row["id"];
+				$intensite_physique->designation = $row["designation"];
+				$intensite_physique->inferieur = $row["inferieur"];
+				$resultats[] = $intensite_physique;
 			}
 			return $resultats;
 		}
 
 		// Mbola tsy mety
+		// public function obtenir_par_frequence($frequence_hebdomadaire) {
+		// 	$this->db->where('inferieur <=', $frequence_hebdomadaire);
+		// 	$this->db->order_by('id', 'DESC');
+		// 	$this->db->limit(1);
+			
+		// 	$query = $this->db->get(self::$table);
+			
+		// 	echo $this->db->last_query();
+		// 	if ($query->num_rows() > 0) {
+		// 		return $query->result();
+		// 	}
+		// 	return false;
+		// }
+
 		public function obtenir_par_frequence($frequence_hebdomadaire) {
-			$this->db->where('inferieur <=', $frequence_hebdomadaire);
-			$this->db->order_by('id', 'DESC');
-			$this->db->limit(1);
-			
-			$query = $this->db->get(self::$table);
-			
-			echo $this->db->last_query();
-			if ($query->num_rows() > 0) {
-				return $query->result();
+			$tout = $this->lister_tout();
+			print_r($tout);
+			foreach($tout as $ligne) {
+				if($frequence_hebdomadaire <= $ligne->inferieur) {
+					return $ligne->id;
+				}
 			}
 			return false;
 		}
