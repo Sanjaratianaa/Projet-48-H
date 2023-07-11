@@ -17,4 +17,5 @@
     <?php $this->load->view($contenu) ?>
     <?php $this->load->view('template/Footer') ?>
 </body>
+<script src="<?=base_url('assets/js/app.js')?>"></script>
 </html>
