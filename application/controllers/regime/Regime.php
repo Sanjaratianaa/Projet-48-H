@@ -12,13 +12,13 @@ class Regime extends CI_Controller{
             $this->data['regimes'] = $this->regime->lister_tout_regime();
             $this->data['titre'] = 'Liste des régimes';
             $this->data['contenu'] = 'regime/index';
-            $this->load->view("template/index", $this->data);
+            $this->load->view("template/index_admin", $this->data);
         }
 
         public function insertion(){
             $this->data['titre'] = 'Ajout d\'un régime';
             $this->data['contenu'] = 'regime/insertion';
-            $this->load->view("template/index", $this->data);
+            $this->load->view("template/index_admin", $this->data);
         }
 
         public function inserer(){
@@ -29,7 +29,7 @@ class Regime extends CI_Controller{
             $this->data['plats'] = $this->plat->lister_tout();
             $this->data['titre'] = 'Ajout d\'un plat régime';
             $this->data['contenu'] = 'regime/insertion_plat';
-            $this->load->view("template/index", $this->data);
+            $this->load->view("template/index_admin", $this->data);
         }
 
         public function detail( $id ){
@@ -37,7 +37,7 @@ class Regime extends CI_Controller{
             $this->data['regimes'] = $regime;
             $this->data['titre'] = 'Le régime '.$regime->designation;
             $this->data['contenu'] = 'regime/detail';
-            $this->load->view("template/index", $this->data);
+            $this->load->view("template/index_admin", $this->data);
         }
 
         public function inserer_plat_regime(){

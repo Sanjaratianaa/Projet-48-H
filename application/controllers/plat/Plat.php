@@ -13,13 +13,13 @@ class Plat extends CI_Controller
         $this->data['plats'] = $this->plat->lister_tout();
         $this->data['titre'] = 'Liste des plats';
         $this->data['contenu'] = 'plat/index';
-        $this->load->view("template/index", $this->data);
+        $this->load->view("template/index_admin", $this->data);
     }
 
     public function insertion(){
         $this->data['titre'] = 'Ajout d\'un plat';
         $this->data['contenu'] = 'plat/insertion';
-        $this->load->view("template/index", $this->data);
+        $this->load->view("template/index_admin", $this->data);
     }
 
     public function inserer(){
@@ -28,7 +28,7 @@ class Plat extends CI_Controller
         $this->data['aliments'] = $this->aliment->lister_tout();
         $this->data['titre'] = 'Ajout d\'un plat régime';
         $this->data['contenu'] = 'plat/insertion_aliment';
-        $this->load->view("template/index", $this->data);
+        $this->load->view("template/index_admin", $this->data);
     }
 
     public function inserer_plat_aliment(){

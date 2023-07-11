@@ -49,7 +49,7 @@ class Login extends CI_Controller {
 			print_r($resultat);
 			//return $_SESSION['utilisateur'];
 			if(isset($_SESSION['administrateur'])){
-				redirect(site_url('Accueil'));
+				redirect(site_url('regime/Regime'));
 			}
 		}else redirect(site_url('authentification/login?error'));
 	}
