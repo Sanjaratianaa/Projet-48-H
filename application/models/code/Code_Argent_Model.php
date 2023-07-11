@@ -1,6 +1,6 @@
 <?php
 
-	class Code_Model extends CI_Model{
+	class Code_Argent_Model extends CI_Model{
 
 		public static $table = 'code_argent';
         public static $primarykey = 'id';
