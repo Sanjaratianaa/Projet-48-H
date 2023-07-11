@@ -14,6 +14,21 @@ class Profil extends CI_Controller {
 		}
 	}
 
+  public function information(){
+    $data['profil'] = $this->profil->obtenir_profil($_SESSION['utilisateur']->id);
+    $data['profils'] = $this->profil->obtenir_profils($_SESSION['utilisateur']->id);
+    $dates = array();
+    $poids = array();
+    foreach ($data['profils'] as $report) {
+      $dates[] = $report->date_report;
+      $poids[] = $report->poids;
+    }
+    $data['dates'] = $dates;
+    $data['poids'] = $poids;
+    $data['contenu'] = 'information/Profil';
+    $this->load->view('template/index', $data);
+  }
+
 	public function insertion()
 	{   
         $poids = $_GET['poids'];

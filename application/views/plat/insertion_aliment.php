@@ -1,3 +1,4 @@
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -34,6 +35,7 @@
         </div>
     </div>
 </div>
+
 <form method="post" action="<?php echo base_url('plat/Plat/inserer_plat_aliment');?>">
 
 </form>
@@ -72,7 +74,9 @@
 
                 </i>
 
+
                 <i class="fas fa-check-double mx-3 btn btn-success" onclick="validate_regime('<?php echo site_url('plat/Plat/inserer_plat_aliment'); ?>', '<?php echo site_url("plat/Plat"); ?>')">
+
                 </i>
 
             </div>
@@ -80,5 +84,4 @@
         </div>
 
         <!-- Button trigger modal -->
-
     </div>

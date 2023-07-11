@@ -7,6 +7,7 @@ class Regime_Model extends CI_Model
         parent::__construct();
         $this->load->model('authentification/Utilisateur_Model','utilisateur');
         $this->load->model('authentification/Profil_Model','profil');
+        $this->load->model('activite/Activite_Model', 'activite');
     }
 
     public static $table = 'regime';
@@ -22,13 +23,13 @@ class Regime_Model extends CI_Model
     public function lister_tout_regime(){
         $requete = $this->db->get(self::$table);
         $resultats = array();
-        $resultats_table = $requete->result_array();
+        $resultats_table = $requete->result();
         foreach($resultats_table as $row) {
-            $regime = new Regime_Model();
+            /*$regime = new Regime_Model();
             $regime->id = $row["id"];
             $regime->designation = $row["designation"];
-            $regime->calorie_moyenne = $row["calorie_moyenne"];
-            $resultats[] = $regime;
+            $regime->calorie_moyenne = $row["calorie_moyenne"];*/
+            $resultats[] = $row;
         }
         return $resultats;
     }
@@ -85,6 +86,44 @@ class Regime_Model extends CI_Model
             throw $exception;
         }
     }
+
+    /**
+     * regime approprie
+     */
+
+     public function obtenir_regime_approprie($utilisateur, $objectif){
+        $activites = $this->utilisateur->lister_activites_approprie($utilisateur);
+        $calorie_necessaire = $this->utilisateur->obtenir_calorie_journaliere($utilisateur, $objectif);
+        $regimes = $this->lister_tout_regime();
+        $moyenne_activite = $this->activite->moyenne_calorique($activites);
+        $val = $regimes[0];
+        $val_calorie = 99999;
+        foreach ($regimes as $regime) {
+            $delta_calorie = abs($calorie_necessaire - ($regime->calorie_moyenne + $moyenne_activite));
+            if($delta_calorie < $val_calorie){
+                $val_calorie = $delta_calorie;
+                $val = $regime;
+            }
+        }
+        return $val;
+     }
+
+     /**
+      * @author Yoann
+      * Retourne les plats du regime
+      */
+     public function obtenir_plats($id_regime){
+        $sql = "select plat.* from plat join plat_regime pr on plat.id = pr.id_plat where id_regime = %s";
+        $sql = sprintf( $sql, $this->db->escape($id_regime));
+        $query = $this->db->query($sql);
+        $return = $query->result();
+        $results = array();
+        foreach ($return as $row) {
+            $results[] = $row;
+        }
+        return $results;
+     }
+
     public function obtenir_regime($id){
         $this->db->where("id",$id);
         $requete = $this->db->get(self::$table);

@@ -39,7 +39,7 @@ class Plat extends CI_Controller
             if ( !empty($id_aliment) && !empty($pourcentage) ){
                 $this->plat->inserer_plat_aliment($designation, $id_aliment, $pourcentage);
             }else{
-                $this->plat->inserer($designation);
+                $this->plat->insert($designation);
             }
             $this->output->set_status_header('200');
             $this->data['success'] = "Added Successfully";
