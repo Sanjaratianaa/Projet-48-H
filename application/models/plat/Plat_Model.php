@@ -42,9 +42,9 @@
             $this->db->trans_start();
             $this->db->insert(self::$table, $data);
             $id_plat = obtenir_sequence_value("plat_id_seq", $this->db);
-            foreach ($id_aliments as $id_aliment){
+            for ($i = 0; $i < count($id_aliments); $i++){
                 $plat_aliment = new Plat_Aliment_Model();
-                $plat_aliment->inserer_plat_aliment_trans($id_plat, $id_aliment, $pourcentage, $this->db);
+                $plat_aliment->inserer_plat_aliment_trans($id_plat, $id_aliments[$i], $pourcentage[$i], $this->db);
             }
             $this->db->trans_complete();
         }catch ( Exception $exception ){

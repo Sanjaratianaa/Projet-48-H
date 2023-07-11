@@ -71,6 +71,24 @@ body {
   color: #ad75b4;
   text-decoration: none;
 }
+.form .admin {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .admin a {
+  color: #ad75b4;
+  text-decoration: none;
+}
+.form .utilisateur {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .utilisateur a {
+  color: #ad75b4;
+  text-decoration: none;
+}
 .form .register-form {
   display: none;
 }
