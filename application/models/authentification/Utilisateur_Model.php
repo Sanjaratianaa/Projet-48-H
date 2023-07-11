@@ -131,6 +131,9 @@
 
 		public function obtenir_perte_necessaire($objectif) {
 			if(strpos($objectif, "-") !== false) {
+				if(abs($objectif) > 10) {
+					return 1500;
+				}
 				return 1000;
 			}else{
 				return 500;
