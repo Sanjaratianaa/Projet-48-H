@@ -36,7 +36,7 @@ class Plat extends CI_Controller
         $pourcentage = $this->input->post('pourcentage');
         $designation = $this->session->userdata('designation');
         try {
-            if ( is_array($id_aliment) && is_array($pourcentage) ){
+            if ( !empty($id_aliment) && !empty($pourcentage) ){
                 $this->plat->inserer_plat_aliment($designation, $id_aliment, $pourcentage);
             }else{
                 $this->plat->insert($designation);

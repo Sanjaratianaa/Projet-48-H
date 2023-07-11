@@ -1,39 +1,40 @@
-   <!-- Modal -->
-   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ajout de plat</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajout de plat</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" class="form" id="form-modal">
+                    <div class="row text-center">
+                        <h3 class="text-center">
+                            Choisir un aliment
+                        </h3>
                     </div>
-                    <div class="modal-body">
-                        <form action="" class="form" id="form-modal">
-                            <div class="row text-center">
-                                <h3 class="text-center">
-                                    Choisir un aliment
-                                </h3>
-                            </div>
-                            <div class="my-3">
-                                <label for="aliment" class="form-label"> Aliment : </label>
-                                <select id="aliment" name="aliment" class="form-select">
-                                    <?php foreach ($aliments as $aliment) {?>
-                                        <option value="<?php echo $aliment->id;?>,<?php echo $aliment->designation_aliment;?>,<?php echo $aliment->designation_categorie;?>"><?php echo $aliment->designation_aliment;?></option>
-                                    <?php }?>
-                                </select>
-                            </div>
-                            <div class="my-3">
-                                <label for="pourcentage" class="form-label"> Pourcentage : </label>
-                                <input type="number" class="form-control" name="pourcentage" id="pourcentage">
-                            </div>
-                        </form>
+                    <div class="my-3">
+                        <label for="aliment" class="form-label"> Aliment : </label>
+                        <select id="aliment" name="aliment" class="form-select">
+                            <?php foreach ($aliments as $aliment) {?>
+                                <option value="<?php echo $aliment->id;?>,<?php echo $aliment->designation_aliment;?>,<?php echo $aliment->designation_categorie;?>"><?php echo $aliment->designation_aliment;?></option>
+                            <?php }?>
+                        </select>
                     </div>
-                    <div class="modal-footer">
-                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                        <button type="button" class="btn btn-primary" onclick="ajout_details_aliment()" data-bs-dismiss="modal">Ajouter un aliment</button>
+                    <div class="my-3">
+                        <label for="pourcentage" class="form-label"> Pourcentage : </label>
+                        <input type="number" class="form-control" name="pourcentage" id="pourcentage">
                     </div>
-                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" onclick="ajout_details_aliment()" data-bs-dismiss="modal">Ajouter un aliment</button>
             </div>
         </div>
+    </div>
+</div>
 
 <form method="post" action="<?php echo base_url('plat/Plat/inserer_plat_aliment');?>">
 
@@ -73,7 +74,9 @@
 
                 </i>
 
-                <i class="fas fa-check-double mx-3 btn btn-success" onclick="validate_regime('<?php echo site_url('plat/plat/inserer_plat_aliment'); ?>', '<?php echo site_url('plat/Plat'); ?>')">
+
+                <i class="fas fa-check-double mx-3 btn btn-success" onclick="validate_regime('<?php echo site_url('plat/Plat/inserer_plat_aliment'); ?>', '<?php echo site_url("plat/Plat"); ?>')">
+
                 </i>
 
             </div>
@@ -81,7 +84,4 @@
         </div>
 
         <!-- Button trigger modal -->
-
-     
-
     </div>

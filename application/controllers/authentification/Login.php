@@ -39,12 +39,19 @@ class Login extends CI_Controller {
 	}
 
 	public function Connexion_Administrateur(){
-		$mail = "";
-		$mot_de_passe = "";
+		echo "Coucouuu adminnn";
         $administrateur = new Administrateur_Model();
+		$mail = $_POST['mail'];
+		$mot_de_passe = $_POST['mot_de_passe'];
 		$resultat = $administrateur->Validation_Connexion($mail, $mot_de_passe);
-		$this->session->set_userdata("administrateur",$resultat);
-		return "";
+		if($resultat != false){
+			$this->session->set_userdata("administrateur",$resultat);
+			print_r($resultat);
+			//return $_SESSION['utilisateur'];
+			if(isset($_SESSION['administrateur'])){
+				redirect(site_url('Accueil'));
+			}
+		}else redirect(site_url('authentification/login?error'));
 	}
 
 	public function deconnexion(){
