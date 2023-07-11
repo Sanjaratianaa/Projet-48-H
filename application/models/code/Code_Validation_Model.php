@@ -37,6 +37,16 @@
 			return $resultats;
 		}
 
+        public function lister_code_valider() {
+            $requete = $this->db->get("v_code_invalider");
+            $resultats = array();
+            $resultats_table = $requete->result_object();
+            foreach($resultats_table as $row) {
+                $resultats[] = $row;
+            }
+            return $resultats;
+        }
+
 	}
 
 ?>

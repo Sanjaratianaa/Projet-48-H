@@ -54,6 +54,16 @@
 			return $resultats;
 		}
 
+        public function lister_code_demande() {
+            $requete = $this->db->get("v_code_valide");
+            $resultats = array();
+            $resultats_table = $requete->result_object();
+            foreach($resultats_table as $row) {
+                $resultats[] = $row;
+            }
+            return $resultats;
+        }
+        
 	}
 
 ?>

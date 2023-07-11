@@ -112,11 +112,10 @@ alter table profil add column frequence_activite int;
         id SERIAL PRIMARY KEY,
         id_code_demande INT,
         id_administrateur INT,
-        date_validation DATE,
+        date_validation date,
         foreign key (id_code_demande) references code_demande(id), 
-        foreign key (id_administrateur) references administrateur(id) 
+        foreign key (id_administrateur) references administrateur(id_administrateur)
     );
-
 -- ALTER
     -- UTILISATEUR
     ALTER TABLE utilisateur add column date_naissance DATE;
@@ -130,21 +129,28 @@ alter table profil add column frequence_activite int;
         select a.id, a.id_categorie_aliment, c.designation as designation_categorie, a.designation as designation_aliment from aliment a join categorie_aliment c on a.id_categorie_aliment = c.id;
     create or replace view v_plat_regime as
         select pr.id, pr.id_plat, pr.id_regime, r.calorie_moyenne, r.designation as designation_regime, p.designation as designation_plat from plat_regime pr join regime r on pr.id_regime = r.id join plat p on pr.id_plat = p.id;
-       
     create or replace view v_code_valide as
-        SELECT code_argent.* 
+        SELECT code_argent.*, sous_requete.id_code_demande, sous_requete.id_utilisateur, sous_requete.id_administrateur, sous_requete.date_validation, sous_requete.date_demande
             FROM code_argent 
             LEFT JOIN 
-                (SELECT code_demande.id_code FROM code_validation
-                JOIN code_demande
-                ON code_validation.id_code_demande = code_demande.id) sous_requete 
+                (SELECT v_code.id id_code_demande, v_code.id id_code, v_code.date_demande, v_code.id_utilisateur, code_validation.id_administrateur, code_validation.date_validation FROM code_validation
+                JOIN v_code
+                ON code_validation.id_code_demande = v_code.id_demande) sous_requete
             ON code_argent.id = sous_requete.id_code WHERE sous_requete.id_code IS NULL;
 
     create or replace view v_code_invalide as
-        SELECT code_argent.* 
+        SELECT code_argent.*, sous_requete.id_code, sous_requete.id_demande, sous_requete.id_utilisateur, sous_requete.date_demande, sous_requete.id_administrateur, sous_requete.date_validation
             FROM code_argent 
             LEFT JOIN 
-                (SELECT code_demande.id_code FROM code_validation
-                JOIN code_demande
-                ON code_validation.id_code_demande = code_demande.id) sous_requete 
+                (SELECT v_code.id id_code, v_code.id_utilisateur, v_code.id id_demande, v_code.date_demande, code_validation.id_administrateur, code_validation.date_validation  FROM code_validation
+                JOIN v_code
+                ON code_validation.id_code_demande = v_code.id_demande) sous_requete
             ON code_argent.id = sous_requete.id_code WHERE sous_requete.id_code IS NOT NULL;
+
+    create or replace view v_code as
+    select ca.*, cd.id as id_demande, cd.id_utilisateur, cd.date_demande from code_argent ca join code_demande cd on ca.id = cd.id_code;
+
+    create or replace view v_code_valide_user as
+        select u.*, cd.id as id_demande, cd.id_utilisateur, cd.date_demande from utilisateur u join v_code_valide cd on u.id = cd.id_utilisateur;
+    create or replace view v_code_invalide_user as
+        select u.*, cd.id as id_demande, cd.id_utilisateur, cd.date_demande from utilisateur u join v_code_invalide cd on u.id = cd.id_utilisateur;
