@@ -1,11 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+body {
+  background: linear-gradient(90deg, #ffffff 0%, rgb(255, 254, 254) 25%, whitesmoke 75%);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;   
+  font-size: large;   
+}
 
 .login-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
 }
-.form {
+.form login {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
@@ -99,13 +106,6 @@
 }
 .container .info span .fa {
   color: #EF3B3A;
-}
-body {
-  /*background: linear-gradient(90deg, #5f3763 0%, #ad75b4 50%);*/
-  font-family: "Roboto", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;   
-  font-size: large;   
 }
 
 .sidenav {
@@ -314,7 +314,7 @@ body {
     text-align: center;
     margin: 0 5px;
     background-color: transparent;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-weight: 900;
   }
 

@@ -130,6 +130,16 @@
 			}else return false;
 		 }
 
+		 public function obtenir_profils($id_utilisateur){
+			$query = $this->db->get_where('v_profil', array('id_utilisateur' => $id_utilisateur), 1);
+			$results = $query->result();
+			$val = array();
+			foreach ($results as $result) {
+				$val[] = $result;
+			}
+			return $val;
+		 }
+
 		public function est_null($id_utilisateur) {
 			$this->db->where('id_utilisateur',$id_utilisateur);
 			$requete = $this->db->get(self::$table);

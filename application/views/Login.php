@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="login-page">
-    <div class="form">
+    <div class="form login">
       <form class="register-form" method="post" action="<?=base_url('authentification/Registration/inscription')?>">
         <input type="text" placeholder="nom" name="nom"/>
         <input type="text" placeholder="prenom(s)" name="prenoms"/>
