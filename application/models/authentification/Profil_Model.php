@@ -70,6 +70,19 @@
 			} catch (Exception $exception) {
 				throw $exception;
 			}
+		}
+
+		public function delete($id_utilisateur, $id_profil) {
+			$data = array(
+				'id_utilisateur' => $id_utilisateur,
+				'id_profil' => $id_profil
+			);
+		
+			try {
+				$this->db->where($data)->delete(self::$table);
+			} catch (Exception $exception) {
+				throw $exception;
+			}
 		}		
 
 		public function lister_tout($id_utilisateur) {
